@@ -8,6 +8,13 @@
     <script src="https://cdn.tiny.cloud/1/9ot4eg1xllb9j1h90j18pxslbqtywc9iy5xnptl6yeo50cqm/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+    <style>
+      #spinner {
+        display: none;
+
+      }
+    </style>
+
     <title>Article genration</title>
   </head>
 
@@ -24,10 +31,17 @@
                         <input type="text" class="form-control my-title border no-border shadow-none fs-3" placeholder="Title" id="title">
                       </div>
                       <div class="m-3">
-                        <textarea class="form-control" id="textarea" rows="3" placeholder="Write your idea..."></textarea>
+                        <textarea class="form-control" id="text" rows="3" placeholder="Write your idea..."></textarea>
                       </div> 
                       <div class="d-grid gap-2 m-3">
-                        <button class="btn btn-outline-success p-3 fs-4" type="button">Generate</button>
+                        <button class="btn btn-outline-success p-3 fs-4 text-center" type="button">
+                        
+                          <div class="">
+                            <div class="spinner-border"  role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                          </div>
+                        </button>
                     </div>               
                  </div>
            
