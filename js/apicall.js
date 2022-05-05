@@ -6,6 +6,7 @@ $(document).ready(function(){
         const title = $(".my-title").val()
         if (title !== '') {
             console.log(title);
+            callAPI(title);
         } else {
             console.log('title is empty');
         }
@@ -13,23 +14,21 @@ $(document).ready(function(){
   });
 
 
-  function addData(){
+
+
+function callAPI(title) {
     $.ajax({
-            type: "POST",
-            url: "http://example.com",
-            data: JSON.stringify(data),
-            contentType: "application/json; charset=utf-8",
-            crossDomain: true,
-            dataType: "json",
-            success: function (data, status, jqXHR) {
+        url: 'https://l3y9dqs7gc.execute-api.us-west-2.amazonaws.com/dev',
+        type: 'POST',
+        dataType: 'json',
+        data: {'prompt': title},
+        success: (result, status, xhr)=> {
+            console.log(result);
+            console.log(typeof(result));
+        },
+        error: (xhr, status, error)=> {
+            alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
+        }
 
-                alert(success);
-            },
-
-            error: function (jqXHR, status) {
-                // error handler
-                console.log(jqXHR);
-                alert('fail' + status.code);
-            }
-         });
-   }
+    });
+};
