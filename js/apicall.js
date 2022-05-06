@@ -16,13 +16,13 @@ $(document).ready(function(){
         }
     });
     $(document).ajaxStart(function () {
-        $("#spinner").show();
-        $("#spinner-text").hide();
+        $("#spinner").css('display', 'block');
+        $("#spinner-text").css('display', 'none');
     });
   
     $(document).ajaxStop(function () {
-        $("#spinner").hide();
-        $("#spinner-text").show();
+        $("#spinner").css('display', 'none');
+        $("#spinner-text").css('display', 'block');
     });
   });
 
