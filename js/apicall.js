@@ -5,10 +5,10 @@ $(document).ready(function(){
     $(".btn").click(function(){
         const title = $(".my-title").val()
         if (title !== '') {
-            console.log(title);
+            // console.log(title);
             const content = tinymce.get('text').getContent({format: 'text'});
             // console.log(tinymce.activeEditor.getContent())
-            console.log('This is content', content)
+            // console.log('This is content', content)
             callAPI(title, content);
 
         } else {
