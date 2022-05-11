@@ -6,11 +6,11 @@ $(document).ready(function(){
         const title = $(".my-title").val()
         if (title !== '') {
             console.log(title);
-            content = tinymce.get('text').getContent({format: 'text'});
+            const content = tinymce.get('text').getContent({format: 'text'});
             // console.log(tinymce.activeEditor.getContent())
             console.log('This is content', content)
-            callAPI(title);
-            $('#text').val()
+            callAPI(title, content);
+
         } else {
             console.log('title is empty');
         }
@@ -29,20 +29,21 @@ $(document).ready(function(){
 
 
 
-function callAPI(title) {
+function callAPI(title, content) {
     $.ajax({
-        url: 'https://7j1jbr1066.execute-api.us-west-2.amazonaws.com/dev',
+        url: 'https://46rc60js1j.execute-api.us-west-2.amazonaws.com/prod',
         type: 'POST',
         dataType: 'json',
-        data: JSON.stringify({"prompt": title}),
+        data: JSON.stringify({"body": {"model_name": "davinci","title": title, "content": content}}),
         headers : {"Content-Type": "application/json"},
         success: (result, status, xhr)=> {
             console.log('This is result', result);
-            // console.log(JSON.parse(result))
-            // console.log(JSON.parse(result))
-            tinymce.get('text').setContent(result['text'])
-            // console.log($('#text').val())
+            output = JSON.parse(result['body'])
 
+            if (result['statusCode'] != 200) {
+                alert(output['error'])
+            }
+            tinymce.get('text').setContent(output['output'])
         },
         error: (xhr, status, error)=> {
             alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText);
