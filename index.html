@@ -53,11 +53,14 @@
     </main>
     <script>
         tinymce.init({
+          remove_linebreaks : false,
           selector: 'textarea',
           skin: 'snow',
           icons: 'jam',
           plugins: 'lists link anchor charmap',
           toolbar: 'blocks|bold italic underline strikethrough | bullist numlist link |undo redo',
+          remove_linebreaks : false,
+
         menubar: false,
         });
       </script>
