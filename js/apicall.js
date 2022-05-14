@@ -1,14 +1,19 @@
 
 
-
+let previousTitle = ''
 $(document).ready(function(){
     $(".btn").click(function(){
         const title = $(".my-title").val()
-        let previousTitle = ''
+        
         if (title !== '') {
             // console.log(title);
+            if (title != previousTitle) {
+                previousTitle = title;
+                tinymce.get('text').setContent('')
+            }
             const content = tinymce.get('text').getContent({format: 'text'});
             console.log(content)
+          
             // console.log(tinymce.activeEditor.getContent())
             // console.log('This is content', content)
             callAPI(previousTitle, title, content);
@@ -42,20 +47,39 @@ function callAPI(previousTitle, title, content) {
    
             console.log('This is result', result);
             output = JSON.parse(result['body'])
-
+            
             if (result['statusCode'] != 200) {
                 alert(output['error'])
             } else {
+                // content = content.replace(/<br><br>/g, '<br><br>')
                 
-                output['content'] = output['content'].replace(/\n\n/g, '<br><br>')
+                output['content'] = output['content'].replace(/\n\n/g, '<br>')
+
+            
                 if (content == "") {
                     console.log('Only Title was provided')
                     console.log(output['content'])
                     tinymce.get('text').setContent(output['content'])
+             
                 } else {
                     console.log('Title and content was provide')
+                    console.log('-'*80);
+                    
                     console.log(output['content'])
-                    tinymce.get('text').setContent(content + '<br><br>' + output['content'])
+                    console.log('-'*80);
+                    console.log(content + output['content'])
+                    // if (title == previousTitle) {
+                        console.log(tinymce.get('text').getContent())
+                        console.log(output['content'])
+                        tinymce.get('text').setContent(tinymce.get('text').getContent() + output['content']);
+                        // tinymce.get('text').setContent(content +  '<br><br>' + output['content'])
+
+                    // console.log(previousTitle, title)
+                    // } else {
+                    //     previousTitle = title;
+                    //     tinymce.get('text').setContent(output['content'])
+                    // }
+
 
                 }
             }
