@@ -51,36 +51,19 @@ function callAPI(previousTitle, title, content) {
             if (result['statusCode'] != 200) {
                 alert(output['error'])
             } else {
-                // content = content.replace(/<br><br>/g, '<br><br>')
                 
                 output['content'] = output['content'].replace(/\n\n/g, '<br>')
 
             
                 if (content == "") {
                     console.log('Only Title was provided')
-                    console.log(output['content'])
+                    // console.log(output['content'])
                     tinymce.get('text').setContent(output['content'])
              
                 } else {
                     console.log('Title and content was provide')
-                    console.log('-'*80);
-                    
-                    console.log(output['content'])
-                    console.log('-'*80);
-                    console.log(content + output['content'])
-                    // if (title == previousTitle) {
-                        console.log(tinymce.get('text').getContent())
-                        console.log(output['content'])
-                        tinymce.get('text').setContent(tinymce.get('text').getContent() + output['content']);
-                        // tinymce.get('text').setContent(content +  '<br><br>' + output['content'])
-
-                    // console.log(previousTitle, title)
-                    // } else {
-                    //     previousTitle = title;
-                    //     tinymce.get('text').setContent(output['content'])
-                    // }
-
-
+                    // console.log(output['content'])
+                    tinymce.get('text').setContent(tinymce.get('text').getContent() + output['content']);
                 }
             }
         },
